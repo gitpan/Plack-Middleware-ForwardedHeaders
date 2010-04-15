@@ -1,0 +1,55 @@
+NAME
+    Plack::Middleware::ForwardedHeaders - Use headers from reverse proxy
+
+SYNOPSIS
+        use Plack::Builder;
+        builder {
+            enable 'ForwardedHeaders';
+            $app;
+        };
+
+DESCRIPTION
+    Uses forwarded headers to determine remote IP address and HTTPS status.
+    It will adjust the `REMOTE_ADDR', `HTTPS', and `psgi.url_scheme'
+    environment items accordingly. The original values are stored in
+    `ORIGINAL_REMOTE_ADDR', `ORIGINAL_HTTPS', and
+    `original.psgi.url_scheme'.
+
+    WARNING: Enabling this middleware without a reverse proxy or a properly
+    configured list of trusted proxies will allow users to spoof their IP
+    address.
+
+CONFIGURATION
+    trusted
+        An IP address or an array reference of IP addresses of trusted
+        proxies. If set, the forwarded headers will only be used if the
+        request comes from one of the addresses listed as trusted.
+
+HTTP HEADERS
+  Remote Address Headers
+    The folling headers are used to determine the remote IP address for a
+    forwarded request.
+
+    X-Forwarded-For
+    X-Forwarded-Host
+    X-Real-IP
+
+  HTTPS Headers
+    The folling headers are used to determine if it a forwarded HTTPS
+    request:
+
+    X-Forwarded-Proto
+    X-Forwarded-SSL
+    X-Forwarded-Sheme
+    Front-End-Ssl
+
+AUTHOR
+    Graham Knop <haarg@haarg.org>
+
+LICENSE
+    Copyright (c) 2010, Graham Knop
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl 5.10.0. For more details, see the full text
+    of the licenses in the directory LICENSES.
+

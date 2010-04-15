@@ -1,0 +1,26 @@
+---
+abstract: 'Use headers from reverse proxy'
+author:
+  - 'Graham Knop <haarg@haarg.org>'
+build_requires:
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.36
+dynamic_config: 0
+generated_by: 'Module::Build version 0.3607'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Plack-Middleware-ForwardedHeaders
+provides:
+  Plack::Middleware::ForwardedHeaders:
+    file: lib/Plack/Middleware/ForwardedHeaders.pm
+    version: 0.001
+requires:
+  Plack: 0.9929
+resources:
+  bugtracker: http://github.com/haarg/Plack-Middleware-ForwardedHeaders/issues
+  license: http://dev.perl.org/licenses/
+  repository: http://github.com/haarg/Plack-Middleware-ForwardedHeaders/tree
+version: 0.001
