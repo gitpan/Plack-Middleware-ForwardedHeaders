@@ -1,5 +1,10 @@
 Revision history for Plack-Middleware-ForwardedHeaders
 
+0.002     2010-04-15 17:50:12 America/Chicago
+          Don't save original values
+          Add Host adjustment
+          Add options to control which headers will be used
+
 0.001     2010-04-15 10:33:23 America/Chicago
           Initial release
 

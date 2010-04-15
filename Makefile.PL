@@ -6,6 +6,8 @@ WriteMakefile
           'VERSION_FROM' => 'lib/Plack/Middleware/ForwardedHeaders.pm',
           'PREREQ_PM' => {
                            'Plack' => '0.9929',
+                           'Socket' => 0,
+                           'Storable' => 0,
                            'Test::More' => 0
                          },
           'INSTALLDIRS' => 'site',

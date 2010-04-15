@@ -9,11 +9,9 @@ SYNOPSIS
         };
 
 DESCRIPTION
-    Uses forwarded headers to determine remote IP address and HTTPS status.
-    It will adjust the `REMOTE_ADDR', `HTTPS', and `psgi.url_scheme'
-    environment items accordingly. The original values are stored in
-    `ORIGINAL_REMOTE_ADDR', `ORIGINAL_HTTPS', and
-    `original.psgi.url_scheme'.
+    Uses forwarded headers to determine remote IP address, HTTPS status, and
+    requested host. It will adjust the `REMOTE_ADDR', `HTTP_HOST', and
+    `psgi.url_scheme' environment items accordingly.
 
     WARNING: Enabling this middleware without a reverse proxy or a properly
     configured list of trusted proxies will allow users to spoof their IP
@@ -25,23 +23,52 @@ CONFIGURATION
         proxies. If set, the forwarded headers will only be used if the
         request comes from one of the addresses listed as trusted.
 
+    use_host
+        If set, forwarded headers will be used to determine the host being
+        requested. Defaults to false.
+
+    use_scheme
+        If set, forwarded headers will be used to determine the URL scheme.
+        Defaults to true.
+
+    use_address
+        If set, forwarded headers will be used to determine the client
+        address. Defaults to true.
+
+    resolve_host
+        If set, the hostname of the client will be resolved and saved in the
+        REMOTE_HOST. Defaults to false.
+
 HTTP HEADERS
+  Host Headers
+    The folling headers are used to determine the original requested host
+    for a forwarded request.
+
+    X-Forwarded-Host
+        Set by Apache 2.2
+
   Remote Address Headers
     The folling headers are used to determine the remote IP address for a
     forwarded request.
 
     X-Forwarded-For
-    X-Forwarded-Host
-    X-Real-IP
+        The de-facto standard for finding the originating client IP address.
+        Set by Squid, Apache 2.2, and many others.
 
-  HTTPS Headers
-    The folling headers are used to determine if it a forwarded HTTPS
-    request:
+    X-Real-IP
+        Used by nginx.
+
+  Scheme Headers
+    The folling headers are used to determine the forwarded scheme:
 
     X-Forwarded-Proto
     X-Forwarded-SSL
-    X-Forwarded-Sheme
-    Front-End-Ssl
+    X-Forwarded-Scheme
+    Front-End-HTTPS
+        Used by Microsoft Internet Security and Acceleration Server
+
+SEE ALSO
+    http://en.wikipedia.org/wiki/X-Forwarded-For
 
 AUTHOR
     Graham Knop <haarg@haarg.org>

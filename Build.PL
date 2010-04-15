@@ -14,9 +14,11 @@ my $build = Module::Build->new(
     },
     requires => {
         'Plack' => 0.9929,
+        'Socket' => 0,
     },
     build_requires => {
         'Test::More' => 0,
+        'Storable' => 0,
     },
 );
 $build->create_build_script;
